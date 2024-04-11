@@ -1,0 +1,10 @@
+.background-container {
+  height: 100vh;
+  width: 100vw;
+}
+
+.background-container img {
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover; /* Added to ensure the image covers the div without stretching. */
+}

@@ -1,0 +1,9 @@
+.tv-shows-container .data {
+  margin-top: 8rem;
+}
+
+.tv-shows-container .data .not-available {
+  text-align: center;
+  color: white;
+  margin-top: 4rem;
+}

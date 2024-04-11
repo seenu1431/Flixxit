@@ -1,0 +1,9 @@
+.movies-container .data {
+  margin-top: 8rem;
+}
+
+.movies-container .data .not-available {
+  text-align: center;
+  color: white;
+  margin-top: 4rem;
+}

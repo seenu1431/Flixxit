@@ -1,0 +1,71 @@
+.signup-container {
+  position: relative;
+}
+
+.signup-container .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: 15vh 85vh;
+}
+
+.signup-container .content .body {
+  gap: 1rem;
+}
+
+.signup-container .content .body .text {
+  gap: 1rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.signup-container .content .body .text h1 {
+  padding: 0 25rem;
+}
+
+.signup-container .content .body .form {
+  display: grid;
+  width: 60%;
+  grid-template-columns: 2fr 1fr;
+}
+
+.signup-container.show-password .content .body .form {
+  grid-template-columns: 1fr 1fr;
+}
+
+.signup-container .content .body .form input {
+  color: black;
+  border: none;
+  padding: 1.5rem;
+  font-size: 1.2rem;
+  border: 1px solid black;
+}
+
+.signup-container .content .body .form input:focus {
+  outline: none;
+}
+
+.signup-container .content .body .form button {
+  padding: 0.5rem 1rem;
+  background-color: #e50914;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-weight: bolder;
+  font-size: 1.05rem;
+}
+
+.signup-container .content .body button {
+  padding: 0.5rem 1rem;
+  background-color: #e50914;
+  border: none;
+  cursor: pointer;
+  color: white;
+  border-radius: 0.2rem;
+  font-weight: bolder;
+  font-size: 1.05rem;
+}

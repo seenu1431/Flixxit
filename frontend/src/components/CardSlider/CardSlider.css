@@ -1,0 +1,43 @@
+.card-slider-container {
+  gap: 1rem;
+  position: relative;
+  padding: 2rem 0;
+}
+
+.card-slider-container h1 {
+  margin-left: 50px;
+}
+
+.wrapper .slider {
+  width: max-content;
+  gap: 1rem;
+  transform: translateX(0px);
+  transition: 0.3s ease-in-out;
+  margin-left: 50px;
+}
+
+.wrapper .slider-action {
+  position: absolute;
+  z-index: 99;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  transition: 0.3s ease-in-out;
+}
+
+.wrapper .slider-action svg {
+  font-size: 2rem;
+}
+
+.wrapper .none {
+  display: none;
+}
+
+.wrapper .left {
+  left: 0;
+}
+
+.wrapper .right {
+  right: 0;
+}

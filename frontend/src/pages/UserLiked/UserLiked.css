@@ -1,0 +1,14 @@
+.user-liked-container .content {
+  margin: 2.3rem;
+  margin-top: 8rem;
+  gap: 3rem;
+}
+
+.user-liked-container .content h1 {
+  margin-left: 3rem;
+}
+
+.user-liked-container .content .grid {
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}

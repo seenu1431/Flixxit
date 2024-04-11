@@ -1,0 +1,27 @@
+.player-container .player {
+  width: 100vw;
+  height: 100vh;
+}
+
+.player-container .player .back {
+  position: absolute;
+  padding: 2rem;
+  z-index: 1;
+}
+
+.player-container .player .back svg {
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.player-container .player video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.player-container .player .youtube {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
