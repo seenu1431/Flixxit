@@ -26,7 +26,6 @@ const createArrayFromRawData = (array, moviesArray, genres) => {
       const name = genres.find(({ id }) => id === genre);
       if (name) movieGenres.push(name.name);
     });
-    // const movieVideo = await axios.get(`${TMDB_BASE_URL}/3/${movie.id}/videos?api_key=${API_KEY}`)
     if (movie.backdrop_path) {
       moviesArray.push({
         id: movie.id,
@@ -82,12 +81,16 @@ export const fetchDataByGenre = createAsyncThunk(
 export const getUserLikedMovies = createAsyncThunk(
   "flixxit/getLiked",
   async (email) => {
-    const {
-      data: { movies },
-    } = await axios.get(
-       `https://flixxit-main.onrender.com/api/user/liked/${email}`
-    );
-    return movies;
+    try {
+      const { data } = await axios.get(
+        `https://flixxit-main.onrender.com/api/user/liked/${email}`
+      );
+      const movies = data?.movies || [];
+      return movies;
+    } catch (error) {
+      const movies = [];
+      return movies;
+    }
   }
 );
 
@@ -96,7 +99,7 @@ export const removeFromLikedMovies = createAsyncThunk(
   async ({ email, movieId }) => {
     const {
       data: { movies },
-    } = await axios.put(`https://api.themoviedb.org/3/api/user/delete`, {
+    } = await axios.put(`https://flixxit-main.onrender.com/api/user/delete`, {
       email,
       movieId,
     });

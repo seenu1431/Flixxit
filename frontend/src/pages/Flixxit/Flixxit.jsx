@@ -1,20 +1,25 @@
+
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import backgroudImage from "../../assets/home.jpg";
 import movieLogo from "../../assets/homeTitle.webp";
 import { FaPlay } from "react-icons/fa";
-import { AiOutlineInfoCircle } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, getGenres } from "../../store";
 import Slider from "../../components/Slider";
 import "./Flixxit.css";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "../../utils/firebase-config";
+import axios from "axios";
 
 const Flixxit = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const genresLoaded = useSelector((state) => state.flixxit.genresLoaded);
   const movies = useSelector((state) => state.flixxit.movies);
+  const [email, setEmail] = useState(undefined);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,6 +33,50 @@ const Flixxit = () => {
   window.onscroll = () => {
     setIsScrolled(window.scrollY === 0 ? false : true);
     return () => (window.onscroll = null);
+  };
+
+  useEffect(() => {
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+      if (currentUser) {
+        setEmail(currentUser.email);
+      } else navigate("/login");
+    });
+  }, [navigate]);
+
+  const addToList = async () => {
+    try {
+      // Fetch data for the movie
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/tv/66732?api_key=e79bfbb6fd29c514b77f7941a63cf423`
+      );
+      const movie = response.data;
+
+      const movieGenres = [];
+
+      movie.genres.forEach((genre) => {
+        const name = movie.genres.find(({ id }) => id === genre.id);
+        if (name) {
+          movieGenres.push(name.name);
+        }
+      });
+
+      const movieData = {
+        id: movie.id,
+        name: movie?.original_name ? movie.original_name : movie.original_title,
+        image: movie.backdrop_path,
+        media_type: movie?.media_type,
+        genres: movieGenres.slice(0, 3),
+      };
+
+      if (movieData) {
+        await axios.post("https://flixxit-main.onrender.com/api/user/add", {
+          email,
+          data: movieData,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -50,8 +99,8 @@ const Flixxit = () => {
             >
               <FaPlay /> Play
             </button>
-            <button className="flex j-center a-center">
-              <AiOutlineInfoCircle /> More Info
+            <button className="flex j-center a-center" onClick={addToList}>
+              <AiOutlinePlus /> Add to list
             </button>
           </div>
         </div>

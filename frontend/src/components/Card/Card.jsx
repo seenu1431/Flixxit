@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoPlayCircleSharp } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -22,15 +22,17 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
   const location = useLocation();
   const isMovie = location.pathname === "/movies";
 
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (currentUser) {
-      setEmail(currentUser.email);
-    } else navigate("/login");
-  });
+  useEffect(() => {
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+      if (currentUser) {
+        setEmail(currentUser.email);
+      } else navigate("/login");
+    });
+  }, [navigate]);
 
   const addToList = async () => {
     try {
-      await axios.post("https://api.themoviedb.org/3/api/user/add", {
+      await axios.post("https://flixxit-main.onrender.com/api/user/add", {
         email,
         data: movieData,
       });

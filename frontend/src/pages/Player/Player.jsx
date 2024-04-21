@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -49,7 +50,6 @@ const Player = () => {
         if (video) {
           return video;
         } else {
-          console.log(video);
           return vid.type === "Trailer";
         }
       });

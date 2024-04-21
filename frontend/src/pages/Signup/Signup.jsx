@@ -1,8 +1,9 @@
+
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BackgroundImage from "../../components/BackgroundImage/BackgroundImage";
 import Header from "../../components/Header/Header";
@@ -31,9 +32,11 @@ function Signup() {
     }
   };
 
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (currentUser) navigate("/");
-  });
+  useEffect(() => {
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+      if (currentUser) navigate("/");
+    });
+  }, [navigate]);
 
   return (
     <div className={`signup-container ${showPassword ? "show-password" : ""}`}>
