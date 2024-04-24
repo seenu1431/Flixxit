@@ -32,7 +32,7 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
 
   const addToList = async () => {
     try {
-      await axios.post("https://flixxit-main.onrender.com/api/user/add", {
+      await axios.post("https://flixxit-main-x231.onrender.com/api/user/add", {
         email,
         data: movieData,
       });
